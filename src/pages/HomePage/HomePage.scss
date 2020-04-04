@@ -1,0 +1,23 @@
+.container {
+  height: 100vh;
+  background-image: linear-gradient(to right, #2193b0, #6dd5ed);
+
+  .buttons-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .button {
+      padding: 15px;
+      width: 150px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+    }
+    .button.signin {
+      margin-top: 300px;
+      margin-bottom: 10px;
+    }
+  }
+}
