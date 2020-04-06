@@ -1,0 +1,11 @@
+.Tilt {
+  box-shadow: 10px 10px 5px grey;
+  background: linear-gradient(89deg, #ff5edf 0%, #04c8de 100%);
+  margin-left: 30px;
+  .Tilt-inner {
+    padding: 20px;
+    .brain {
+      height: 65px;
+    }
+  }
+}
