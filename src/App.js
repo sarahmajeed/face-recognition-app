@@ -1,9 +1,11 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import Clarifai from 'clarifai';
 import Particles from 'react-particles-js';
 import Navigation from './components/Navigation/Navigation';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
+import Signin from './components/Signin/Signin';
 import Rank from './components/Rank/Rank';
 import Logo from './components/Logo/Logo/Logo';
 import './App.scss';
@@ -31,11 +33,36 @@ class App extends Component {
     this.state = {
       input: '',
       imageURL: '',
+      box: {},
     };
     this.onInputChange = this.onInputChange.bind(this);
     this.onButtonSubmit = this.onButtonSubmit.bind(this);
   }
-  onInputChange = event => {
+  calculateFaceLocation = (res) => {
+    const clarifaiFace =
+      res.outputs[0].data.regions[0].region_info.bounding_box;
+
+    const image = document.getElementById('inputimage');
+
+    const width = Number(image.width);
+    const height = Number(image.height);
+    console.log(clarifaiFace);
+    return {
+      leftCol: clarifaiFace.left_col * width,
+      topRow: clarifaiFace.top_row * height,
+      rightCol: width - clarifaiFace.right_col * width,
+      bottomRow: height - clarifaiFace.bottom_row * height,
+    };
+  };
+
+  displayFaceBox = (box) => {
+    console.log(box);
+    this.setState({
+      box,
+    });
+  };
+
+  onInputChange = (event) => {
     this.setState({
       input: event.target.value,
     });
@@ -44,14 +71,12 @@ class App extends Component {
     this.setState({
       imageURL: this.state.input,
     });
-    app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input).then(
-      function(response) {
-        console.log(response);
-      },
-      function(err) {
-        // there was an error
-      }
-    );
+    app.models
+      .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
+      .then((response) =>
+        this.displayFaceBox(this.calculateFaceLocation(response))
+      )
+      .catch((err) => console.log(err));
   };
   render() {
     return (
@@ -59,12 +84,28 @@ class App extends Component {
         <Particles className='particles' params={particlesOptions} />
         <Navigation />
         <Logo />
-        <Rank />
-        <ImageLinkForm
-          onInputChange={this.onInputChange}
-          onButtonSubmit={this.onButtonSubmit}
+        <Route exact path='/signin' render={() => <Signin />} />
+        <Route exact path='/facedetect' render={() => <Rank />} />
+        <Route
+          exact
+          path='/facedetect'
+          render={() => (
+            <ImageLinkForm
+              onInputChange={this.onInputChange}
+              onButtonSubmit={this.onButtonSubmit}
+            />
+          )}
         />
-        <FaceRecognition imageURL={this.state.imageURL} />
+        <Route
+          exact
+          path='/facedetect'
+          render={() => (
+            <FaceRecognition
+              box={this.state.box}
+              imageURL={this.state.imageURL}
+            />
+          )}
+        />
       </div>
     );
   }
