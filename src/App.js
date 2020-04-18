@@ -1,31 +1,18 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import Clarifai from 'clarifai';
-import Particles from 'react-particles-js';
+
 import Navigation from './components/Navigation/Navigation';
-import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
-import FaceRecognition from './components/FaceRecognition/FaceRecognition';
-import Signin from './components/Signin/Signin';
-import Rank from './components/Rank/Rank';
+import FaceDetection from './Pages/FaceDetection/FaceDetection';
+import Register from './Pages/Register/Register';
 import Logo from './components/Logo/Logo/Logo';
+import HomePage from './Pages/HomePage/HomePage';
 import './App.scss';
 import { Component } from 'react';
 
 const app = new Clarifai.App({
   apiKey: '0f21e1e7e1864a4f8fa879769798a2d4',
 });
-
-const particlesOptions = {
-  particles: {
-    number: {
-      value: 100,
-      density: {
-        enable: true,
-        value_area: 800,
-      },
-    },
-  },
-};
 
 class App extends Component {
   constructor() {
@@ -81,30 +68,16 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
-        <Particles className='particles' params={particlesOptions} />
         <Navigation />
         <Logo />
-        <Route exact path='/signin' render={() => <Signin />} />
-        <Route exact path='/facedetect' render={() => <Rank />} />
-        <Route
-          exact
-          path='/facedetect'
-          render={() => (
-            <ImageLinkForm
-              onInputChange={this.onInputChange}
-              onButtonSubmit={this.onButtonSubmit}
-            />
-          )}
-        />
-        <Route
-          exact
-          path='/facedetect'
-          render={() => (
-            <FaceRecognition
-              box={this.state.box}
-              imageURL={this.state.imageURL}
-            />
-          )}
+        <Route exact path='/' render={() => <HomePage />} />
+        <Register />
+
+        <FaceDetection
+          onInputChange={this.onInputChange}
+          onButtonSubmit={this.onButtonSubmit}
+          box={this.state.box}
+          imageURL={this.state.imageURL}
         />
       </div>
     );

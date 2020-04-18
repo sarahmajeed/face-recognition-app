@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './signin.scss';
 
 const handleSubmit = () => {
   console.log('working');
 };
 
-const Signin = () => {
+function Signup() {
   return (
     <div>
       <form className='form'>
         <div className='inputs'>
+          <input type='text' required />
           <input type='email' required />
           <input type='password' required />
         </div>
@@ -20,10 +20,10 @@ const Signin = () => {
       </form>
       <span></span>
       <p>
-        Dont have an account? <Link to='/signup'>Register here</Link>
+        Already have an account? <Link to='/signin'>Log in here</Link>
       </p>
     </div>
   );
-};
+}
 
-export default Signin;
+export default Signup;

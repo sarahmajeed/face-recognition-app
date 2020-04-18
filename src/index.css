@@ -3,7 +3,6 @@ body {
   font-family: 'Courier New', Courier, monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(89deg, #ff5edf 0%, #04c8de 100%);
 }
 
 code {
@@ -13,4 +12,15 @@ code {
 .center {
   display: flex;
   justify-content: center;
+}
+
+.btn {
+  margin-top: 10px;
+  padding: 10px;
+  width: 150px;
+  text-transform: uppercase;
+  border: none;
+  background-color: #04c8de;
+  cursor: pointer;
+  font-weight: 800;
 }
