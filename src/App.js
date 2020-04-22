@@ -4,7 +4,8 @@ import Clarifai from 'clarifai';
 
 import Navigation from './components/Navigation/Navigation';
 import FaceDetection from './Pages/FaceDetection/FaceDetection';
-import Register from './Pages/Register/Register';
+import Signin from './components/Signin/Signin';
+import Signup from './components/Signup/Signup';
 import Logo from './components/Logo/Logo/Logo';
 import HomePage from './Pages/HomePage/HomePage';
 import './App.scss';
@@ -75,11 +76,21 @@ class App extends Component {
         <Navigation />
         <Logo />
         <Route exact path='/' render={() => <HomePage />} />
+
+        <Route
+          exact
+          path='/signin'
+          render={(routeProps) => (
+            <Signin
+              handleSignin={() => this.handleSignin(routeProps.history)}
+            />
+          )}
+        />
         <Route
           exact
           path='/signup'
           render={(routeProps) => (
-            <Register
+            <Signup
               handleSignin={() => this.handleSignin(routeProps.history)}
             />
           )}
