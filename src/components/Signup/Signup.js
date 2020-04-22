@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import './Signup.scss';
 import Tilt from 'react-tilt';
 
@@ -19,6 +20,7 @@ class Signup extends Component {
       [name]: value,
     });
   }
+
   render() {
     const { username, email, password } = this.state;
     return (
@@ -87,10 +89,12 @@ class Signup extends Component {
               />
             </div>
 
-            <button className='btn'>Sign Up</button>
-            <p className='terms'>
+            <button onClick={this.props.handleSignin} className='btn'>
+              Sign Up
+            </button>
+            {/* <p className='terms'>
               By signing up, you agree to our Terms of Use and Privacy Policy.
-            </p>
+            </p> */}
             <span className='span'></span>
             <p className='login'>
               Already have an account? <Link to='/signin'>Log In</Link>
@@ -102,4 +106,4 @@ class Signup extends Component {
   }
 }
 
-export default Signup;
+export default withRouter(Signup);

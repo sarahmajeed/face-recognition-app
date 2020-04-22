@@ -10,7 +10,6 @@ class Signin extends Component {
       password: '',
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(event) {
     const { name, value } = event.target;
@@ -19,10 +18,6 @@ class Signin extends Component {
     });
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    console.log('working');
-  }
   render() {
     const { email, password } = this.state;
     return (
@@ -31,7 +26,7 @@ class Signin extends Component {
           className='Tilt'
           options={{ max: 15 }}
           style={{ height: 500, width: 500 }}>
-          <form className='Tilt form' onSubmit={this.handleSubmit}>
+          <form className='Tilt form'>
             <p className='head'>Log In to you account here!</p>
             <span className='span'></span>
 
@@ -72,7 +67,9 @@ class Signin extends Component {
               />
             </div>
 
-            <button className='btn'>Log In</button>
+            <button onClick={this.props.handleSignin} className='btn'>
+              Log In
+            </button>
             <span className='span'></span>
             <p className='login'>
               Don't have an account? <Link to='/signup'>Sign Up</Link>

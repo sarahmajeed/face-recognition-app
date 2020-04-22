@@ -25,6 +25,10 @@ class App extends Component {
     this.onInputChange = this.onInputChange.bind(this);
     this.onButtonSubmit = this.onButtonSubmit.bind(this);
   }
+  handleSignin(history) {
+    console.log(history);
+    return history.push('/facedetect');
+  }
   calculateFaceLocation = (res) => {
     const clarifaiFace =
       res.outputs[0].data.regions[0].region_info.bounding_box;
@@ -71,7 +75,15 @@ class App extends Component {
         <Navigation />
         <Logo />
         <Route exact path='/' render={() => <HomePage />} />
-        <Register />
+        <Route
+          exact
+          path='/signup'
+          render={(routeProps) => (
+            <Register
+              handleSignin={() => this.handleSignin(routeProps.history)}
+            />
+          )}
+        />
 
         <FaceDetection
           onInputChange={this.onInputChange}
