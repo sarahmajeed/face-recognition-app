@@ -38,6 +38,12 @@ function FaceDetection({ onInputChange, onButtonSubmit, box, imageURL }) {
         path='/facedetect'
         render={() => <FaceRecognition box={box} imageURL={imageURL} />}
       />
+      <p>
+        <i>
+          The current version only detects images with a single face. The next
+          version is under production...
+        </i>
+      </p>
     </div>
   );
 }
