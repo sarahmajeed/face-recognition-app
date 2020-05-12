@@ -25,6 +25,14 @@ class App extends Component {
     };
     this.onInputChange = this.onInputChange.bind(this);
     this.onButtonSubmit = this.onButtonSubmit.bind(this);
+    this.handleHomepageSignin = this.handleHomepageSignin.bind(this);
+  }
+  handleHomepageSignin(history) {
+    console.log('working');
+    return history.push('/signin');
+  }
+  handleHomepageRegister(history) {
+    return history.push('/signup');
   }
   handleSignin(history) {
     console.log(history);
@@ -75,7 +83,20 @@ class App extends Component {
       <div className='App'>
         <Navigation />
         <Logo />
-        <Route exact path='/' render={() => <HomePage />} />
+        <Route
+          exact
+          path='/'
+          render={(routeProps) => (
+            <HomePage
+              handleHomepageSignin={() =>
+                this.handleHomepageSignin(routeProps.history)
+              }
+              handleHomepageRegister={() =>
+                this.handleHomepageRegister(routeProps.history)
+              }
+            />
+          )}
+        />
 
         <Route
           exact
