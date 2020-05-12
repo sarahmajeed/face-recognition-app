@@ -4,7 +4,9 @@ import './HomePage.scss';
 const HomePage = ({ handleHomepageSignin, handleHomepageRegister }) => {
   return (
     <div className='home'>
-      <h1>Want to get your face detected?</h1>
+      <h1>
+        <i>Want to get your face detected?</i>
+      </h1>
       <button className='btn' onClick={handleHomepageRegister}>
         Register
       </button>
