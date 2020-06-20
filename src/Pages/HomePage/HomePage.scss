@@ -1,8 +1,10 @@
+
 .home {
-  margin-top: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  position: relative;
+  height: 100vh;
+  background-image: url('../../images/face.jpg');
+  background-size: cover;
+ 
   .link {
     position: absolute;
     top: 10px;
@@ -21,13 +23,20 @@
       color: #38539B;
     }
   }
+  .main{
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   h1 {
     color: #102542;
+    
   }
   .btn:hover {
     background-color: #102542;
     color: white;
   }
+}
   .source-code {
     position: absolute;
     bottom: 0;
@@ -43,7 +52,15 @@
         font-weight: 700;
         text-decoration: none;
         cursor: pointer;
+        color: black;
       }
     }
+    .overlay  {
+      background-color: #3792cb;
+      opacity: 0.4;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+ }
   }
 
