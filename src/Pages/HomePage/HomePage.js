@@ -1,5 +1,6 @@
 import React from 'react';
 import './HomePage.scss';
+import Tilt from 'react-tilt';
 import Navigation from '../../components/Navigation/Navigation.js';
 import Logo from '../../components/Logo/Logo/Logo';
 
@@ -15,22 +16,25 @@ const HomePage = ({ handleHomepageSignin, handleHomepageRegister }) => {
         <a rel="noopener noreferrer" target="_blank" href="https://www.facebook.com/sarah.majeed.507/"><i class="fab fa-facebook fa-2x"></i></a>
       </div>
       <div className="main">
-        <h1>
+        {/* <h1>
           <i>Want to get your face detected?</i>
-        </h1>
-        <button className='btn' onClick={handleHomepageRegister}>
+        </h1> */}
+        <button className='btn first' onClick={handleHomepageRegister}>
           Register
       </button>
         <button className='btn' onClick={handleHomepageSignin}>
           Signin
       </button>
       </div>
+      {/* Tilt */}
+
       <div className="source-code">
         <a rel="noopener noreferrer" target="_blank" href="https://github.com/Sarahmdawood/face-recognition-app">
           <i class='fa fa-github fa-2x'></i>
           <p>View Source Code</p>
         </a>
       </div>
+
 
     </div>
   );
