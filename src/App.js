@@ -115,13 +115,20 @@ class App extends Component {
             />
           )}
         />
-
-        <FaceDetection
-          onInputChange={this.onInputChange}
-          onButtonSubmit={this.onButtonSubmit}
-          box={this.state.box}
-          imageURL={this.state.imageURL}
+        <Route
+          exact
+          path='/facedetect'
+          render={(routeProps) => (
+            <FaceDetection
+              onInputChange={this.onInputChange}
+              onButtonSubmit={this.onButtonSubmit}
+              box={this.state.box}
+              imageURL={this.state.imageURL}
+            />
+          )}
         />
+
+
       </div>
     );
   }
