@@ -1,12 +1,10 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import Clarifai from 'clarifai';
-
-import Navigation from './components/Navigation/Navigation';
 import FaceDetection from './Pages/FaceDetection/FaceDetection';
 import Signin from './components/Signin/Signin';
 import Signup from './components/Signup/Signup';
-import Logo from './components/Logo/Logo/Logo';
+
 import HomePage from './Pages/HomePage/HomePage';
 import './App.scss';
 import { Component } from 'react';
@@ -22,22 +20,39 @@ class App extends Component {
       input: '',
       imageURL: '',
       box: {},
+      user: {
+        id: '',
+        name: '',
+        email: '',
+        entries: 0,
+        joined: ''
+      }
     };
     this.onInputChange = this.onInputChange.bind(this);
     this.onButtonSubmit = this.onButtonSubmit.bind(this);
     this.handleHomepageSignin = this.handleHomepageSignin.bind(this);
+    this.loadUser = this.loadUser.bind(this);
   }
+
+  loadUser = (data) => {
+    this.setState({
+      user: {
+        id: data.id,
+        name: data.name,
+        email: data.email,
+        entries: data.entries,
+        joined: data.joined
+      }
+    })
+  }
+
   handleHomepageSignin(history) {
-    console.log('working');
     return history.push('/signin');
   }
   handleHomepageRegister(history) {
     return history.push('/signup');
   }
-  handleSignin(history) {
-    console.log(history);
-    return history.push('/facedetect');
-  }
+
   calculateFaceLocation = (res) => {
     const clarifaiFace =
       res.outputs[0].data.regions[0].region_info.bounding_box;
@@ -73,11 +88,24 @@ class App extends Component {
     });
     app.models
       .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
-      .then((response) =>
+      .then((response) => {
+        fetch('http://localhost:5000/image', {
+          method: 'put',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            id: this.state.user.id
+          })
+        })
+          .then(res => res.json())
+          .then(count => {
+            this.setState(Object.assign(this.state.user, { entries: count }))
+          })
         this.displayFaceBox(this.calculateFaceLocation(response))
+      }
       )
       .catch((err) => console.log(err));
   };
+
   render() {
     return (
       <div className='App'>
@@ -102,7 +130,8 @@ class App extends Component {
           path='/signin'
           render={(routeProps) => (
             <Signin
-              handleSignin={() => this.handleSignin(routeProps.history)}
+              loadUser={this.loadUser}
+              routeProps={routeProps}
             />
           )}
         />
@@ -111,7 +140,8 @@ class App extends Component {
           path='/signup'
           render={(routeProps) => (
             <Signup
-              handleSignin={() => this.handleSignin(routeProps.history)}
+              loadUser={this.loadUser}
+              routeProps={routeProps}
             />
           )}
         />
@@ -124,6 +154,8 @@ class App extends Component {
               onButtonSubmit={this.onButtonSubmit}
               box={this.state.box}
               imageURL={this.state.imageURL}
+              name={this.state.user.name}
+              entries={this.state.user.entries}
             />
           )}
         />

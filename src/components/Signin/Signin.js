@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from '../../utils/API';
+
 
 class Signin extends Component {
   constructor() {
@@ -9,6 +11,7 @@ class Signin extends Component {
       password: '',
     };
     this.handleChange = this.handleChange.bind(this);
+    // this.handleSignin = this.handleSignin.bind(this);
   }
   handleChange(event) {
     const { name, value } = event.target;
@@ -17,10 +20,31 @@ class Signin extends Component {
     });
   }
 
+
+
   render() {
+    const handleSignin = (event) => {
+      event.preventDefault();
+      fetch('http://localhost:5000/signin', {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: this.state.email,
+          password: this.state.password
+        })
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data === 'Success') {
+            this.props.routeProps.history.push('/facedetect')
+          }
+        }
+        )
+    }
+    console.log('signin rendering')
     const { email, password } = this.state;
     return (
-      <div className='main'>
+      <div className='packet'>
         <form className='form'>
           <p className='head'>Log In to you account here!</p>
           <span className='span'></span>
@@ -32,7 +56,7 @@ class Signin extends Component {
               </label>
             </div>
             {/* Email icon */}
-            <i class='fas fa-envelope fa-s icon'></i>
+            <i className='fas fa-envelope fa-s icon'></i>
             <input
               onChange={this.handleChange}
               value={email}
@@ -50,7 +74,7 @@ class Signin extends Component {
                 Password
               </label>
             </div>
-            <i class='fas fa-key fa-s icon'></i>
+            <i className='fas fa-key fa-s icon'></i>
             <input
               onChange={this.handleChange}
               value={password}
@@ -62,10 +86,10 @@ class Signin extends Component {
             />
           </div>
 
-          <button onClick={this.props.handleSignin} className='btn'>
+          <button onClick={handleSignin} className='btn'>
             Log In
           </button>
-          <span className='span'></span>
+
           <p className='login'>
             Don't have an account? <Link to='/signup'>Sign Up</Link>
           </p>

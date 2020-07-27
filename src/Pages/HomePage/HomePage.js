@@ -1,6 +1,5 @@
 import React from 'react';
 import './HomePage.scss';
-import Tilt from 'react-tilt';
 import Navigation from '../../components/Navigation/Navigation.js';
 import Logo from '../../components/Logo/Logo/Logo';
 
@@ -30,7 +29,7 @@ const HomePage = ({ handleHomepageSignin, handleHomepageRegister }) => {
 
       <div className="source-code">
         <a rel="noopener noreferrer" target="_blank" href="https://github.com/Sarahmdawood/face-recognition-app">
-          <i class='fa fa-github fa-2x'></i>
+          <i className='fa fa-github fa-2x'></i>
           <p>View Source Code</p>
         </a>
       </div>

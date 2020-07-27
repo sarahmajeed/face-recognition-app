@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-// import Particles from 'react-particles-js';
+import Rank from '../../components/Rank/Rank'
 
 import ImageLinkForm from '../../components/ImageLinkForm/ImageLinkForm';
 import FaceRecognition from '../../components/FaceRecognition/FaceRecognition';
@@ -18,11 +18,12 @@ import './FaceDetection.scss';
 //   },
 // };
 
-function FaceDetection({ onInputChange, onButtonSubmit, box, imageURL }) {
+function FaceDetection({ onInputChange, onButtonSubmit, box, imageURL, name, entries }) {
+  console.log('face detection rendering')
   return (
     <div className='body'>
       {/* <Particles className='particles' params={particlesOptions} /> */}
-      {/* <Route exact path='/facedetect' render={() => <Rank />} /> */}
+      <Route exact path='/facedetect' render={() => <Rank name={name} entries={entries} />} />
       <Route
         exact
         path='/facedetect'

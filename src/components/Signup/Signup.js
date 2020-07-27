@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import './Signup.scss';
-import Tilt from 'react-tilt';
+
 
 class Signup extends Component {
   constructor() {
@@ -13,6 +13,7 @@ class Signup extends Component {
       password: '',
     };
     this.handleChange = this.handleChange.bind(this);
+    //  this.handleSignup = this.handleSignup.bind(this);
   }
   handleChange(event) {
     const { name, value } = event.target;
@@ -21,12 +22,36 @@ class Signup extends Component {
     });
   }
 
+
+
+
   render() {
+    const handleSignup = (event) => {
+      event.preventDefault();
+      fetch('http://localhost:5000/signup', {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: this.state.username,
+          email: this.state.email,
+          password: this.state.password
+        })
+      })
+        .then(res => res.json())
+        .then(user => {
+          if (user) {
+
+            this.props.routeProps.history.push('/facedetect')
+            this.props.loadUser(user)
+            console.log(user);
+          }
+        })
+    }
     const { username, email, password } = this.state;
     return (
-      <div class='main'>
-        <form class='form'>
-          <p class='head'>Sign Up here!</p>
+      <div className='packet' >
+        <form className='form'>
+          <p className='head'>Sign Up here!</p>
           <span className='span'></span>
 
           {/* input */}
@@ -56,7 +81,7 @@ class Signup extends Component {
               </label>
             </div>
             {/* Email icon */}
-            <i class='fas fa-envelope fa-s icon'></i>
+            <i className='fas fa-envelope fa-s icon'></i>
             <input
               name='email'
               type='email'
@@ -74,7 +99,7 @@ class Signup extends Component {
               </label>
             </div>
             {/* password icon */}
-            <i class='fas fa-key fa-s icon'></i>
+            <i className='fas fa-key fa-s icon'></i>
             <input
               name='password'
               type='password'
@@ -85,13 +110,10 @@ class Signup extends Component {
             />
           </div>
 
-          <button onClick={this.props.handleSignin} className='btn'>
+          <button onClick={handleSignup} className='btn'>
             Sign Up
           </button>
-          {/* <p className='terms'>
-              By signing up, you agree to our Terms of Use and Privacy Policy.
-            </p> */}
-          <span className='span'></span>
+
           <p className='login'>
             Already have an account? <Link to='/signin'>Log In</Link>
           </p>
