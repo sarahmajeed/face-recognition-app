@@ -144,6 +144,12 @@
     }
   }
 
+  @media  (max-width:800px){
+    .home{
+      clip-path: polygon(0 0, 79% 0, 96% 49%, 79% 100%, 0 100%, 0% 50%);
+    }
+  }
+
  
 
   
