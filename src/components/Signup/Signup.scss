@@ -1,7 +1,7 @@
 @import '../../styles/colors.scss';
 
 .packet {
-  background: linear-gradient(89deg, #ff5edf 0%, #04c8de 100%);
+  // background: linear-gradient(89deg, #ff5edf 0%, #04c8de 100%);
   color:black;
   border: 1px solid transparent;
   min-height: 100vh;
@@ -71,29 +71,6 @@
         left: 18px;
      }
     }
-  
-    
-    .btn {
-      
-      text-transform: uppercase;
-      background-color:  yellow;
-      color:black;
-      margin-top: 10px;
-      margin-left: 12px;
-      width:100px;
-      height: 40px;
-      border: none;
-      cursor: pointer;
-    }
-    .btn:hover {
-   
-      background-color: #102542;
-      color: white;
-    }
-
-  
-  
-   
   }
 }
 

@@ -6,17 +6,17 @@ import facedetect from '../../images/facedetect.jpg';
 
 const HomePage = ({ handleHomepageSignin, handleHomepageRegister }) => {
 
+  // const hoverMe = () => {
+  //   document.getElementById('hidden').className = 'afterhover';
+
+  //   console.log('inside');
+  // }
+
   return (
     <div className='home'>
       {/* <div className="overlay"></div> */}
       <Navigation />
       {/* <Logo /> */}
-      <div className="link">
-        <a rel="noopener noreferrer" target="_blank" href="https://github.com/Sarahmdawood"><i class="fa fa-github fa"></i></a>
-        <a rel="noopener noreferrer" target="_blank" href="https://www.linkedin.com/in/sarahmajeed/"><i class="fab fa-linkedin fa"></i></a>
-
-        <a rel="noopener noreferrer" target="_blank" href="https://www.facebook.com/sarah.majeed.507/"><i class="fab fa-facebook fa"></i></a>
-      </div>
       <div className="main">
 
         <div className="thirdh1">
@@ -34,15 +34,15 @@ const HomePage = ({ handleHomepageSignin, handleHomepageRegister }) => {
       </div>
       {/* Tilt */}
 
-      {/* <div className="source-code">
+      <div className="source-code">
         <a rel="noopener noreferrer" target="_blank" href="https://github.com/Sarahmdawood/face-recognition-app">
           <i className='fa fa-github fa-2x'></i>
           <p>View Source Code</p>
         </a>
-      </div> */}
+      </div>
 
 
-    </div>
+    </div >
   );
 };
 
