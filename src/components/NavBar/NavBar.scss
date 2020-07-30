@@ -4,6 +4,10 @@
   justify-content: space-evenly;
   .logo{
     margin-left: 15px;
+    cursor: pointer;
+    &:hover{
+      box-shadow: 5px 10px 18px lightgray;
+    }
     img{
     height: 50px;
     width: 50px;
@@ -11,12 +15,23 @@
     
   }
   .signout{
-    margin-top: 20px;
-    margin-right: 20px;
-    color: black;
-    &:hover{
+    .signout-label{
       cursor: pointer;
+      margin-top: 20px;
+      margin-right: 50px;
+      margin-bottom: 5px;
+      color: black;
+      transition: transform 2s;
+    &:hover + .line{
+      margin-right:50px ;
+      cursor: pointer;
+      display: block;
+      height: 1px;
+      width: 70px;
+      background-color: black;
+      animation: spanslider 1s;
     }
+  }
      .line{
       display: none;
     }
@@ -29,6 +44,21 @@
     display: block;
     height: 1px;
     width: 70px;
+    background-color: black;
+  }
+}
+
+@keyframes spanslider{
+  0%{
+    background-color: white;
+  }
+  25%{
+    background-color: lightgray;
+  }
+  50%{
+    background-color: grey;
+  }
+  100%{
     background-color: black;
   }
 }

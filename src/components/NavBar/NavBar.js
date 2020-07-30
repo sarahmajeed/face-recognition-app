@@ -9,7 +9,7 @@ function NavBar() {
         <img src={logo} alt="" />
       </div>
       <div className="signout">
-        <div>Sign out</div>
+        <div className='signout-label'>Sign out</div>
         <span className="line"></span>
       </div>
     </nav>
