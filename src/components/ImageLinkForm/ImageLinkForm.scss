@@ -1,14 +1,52 @@
-.input-wrap {
-  margin: 20px;
-
-  .input {
-    padding: 5px;
-    width: 300px;
-    margin-right: 10px;
+.input-wrap{
+    margin: 20px;
+    h3{
+      font-size: 2em;
+    }
+  
+    .input {
+      padding: 5px;
+      width: 300px;
+      margin-right: 10px;
+    }
+    .button {
+      padding: 5px;
+      width: 120px;
+      text-transform: uppercase;
+      background-color: transparent;
+      border: 1px solid black;
+      &:hover {
+        background-color: black;
+        cursor: pointer;
+        color: white;
+      }
+    }
   }
-  .button {
-    padding: 5px;
-    width: 120px;
-    text-transform: uppercase;
+
+
+@media (max-width:800px){
+  .input-wrap {
+    margin: 20px;
+    h3{
+      font-size: 2em;
+    }
+  
+    .input {
+      padding: 5px;
+      width: 300px;
+      margin-right: 10px;
+    }
+    .button {
+      padding: 5px;
+      width: 120px;
+      text-transform: uppercase;
+      background-color: transparent;
+      border: 1px solid black;
+      &:hover {
+        background-color: black;
+        cursor: pointer;
+        color: white;
+      }
+    }
   }
 }

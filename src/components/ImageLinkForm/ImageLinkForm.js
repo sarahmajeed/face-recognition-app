@@ -1,15 +1,15 @@
 import React from 'react';
 import './ImageLinkForm.scss';
 
-const ImageLinkForm = ({ onInputChange, onButtonSubmit }) => {
+const ImageLinkForm = ({ onInputChange, onButtonSubmit, name, entries }) => {
   return (
     <div>
-      <h3 className='info'>
-        <i>
-          This Magic Brain will detect faces in your pictures. Give it a try!
-        </i>
-      </h3>
       <div className='input-wrap'>
+        <h3 className='info'>
+          Face Detector. Give it a try!
+        </h3>
+        <div className='rank'> {`${name}, your current entry count is...`}</div>
+        <div>{entries}</div>
         <input type='text' className='input' onChange={onInputChange} />
         <button onClick={onButtonSubmit} className='button'>
           Detect
