@@ -34,14 +34,15 @@ class Signin extends Component {
         })
       })
         .then(res => res.json())
-        .then(data => {
-          if (data === 'Success') {
+        .then(user => {
+          console.log(user)
+          if (user.id) {
+            this.props.loadUser(user)
             this.props.routeProps.history.push('/facedetect')
           }
         }
         )
     }
-    console.log('signin rendering')
     const { email, password } = this.state;
     return (
       <div className='packet'>

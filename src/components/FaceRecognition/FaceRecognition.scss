@@ -4,6 +4,10 @@
     height: 400px;
     width: 400px;
     border: 1px solid black;
+    #inputimage{
+      width:400px;
+      height:400px;
+    }
   }
   .bounding-box {
     position: absolute;
@@ -19,7 +23,11 @@
   .main{
     .wrap{
       height: 300px;
-    width: 300px;
+      width: 300px;
+      #inputimage{
+      width:300px;
+      height:300px;
+      }
     }
   }
 }
