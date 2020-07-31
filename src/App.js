@@ -10,7 +10,7 @@ import './App.scss';
 import { Component } from 'react';
 
 const app = new Clarifai.App({
-  apiKey: '0f21e1e7e1864a4f8fa879769798a2d4',
+  apiKey: '353f9cde81b746158b672581a1026c1e',
 });
 
 class App extends Component {
@@ -94,17 +94,17 @@ class App extends Component {
     app.models
       .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
       .then((response) => {
-        // fetch('http://localhost:5000/image', {
-        //   method: 'put',
-        //   headers: { 'Content-Type': 'application/json' },
-        //   body: JSON.stringify({
-        //     id: this.state.user.id
-        //   })
-        // })
-        //   .then(res => res.json())
-        //   .then(count => {
-        //     this.setState(Object.assign(this.state.user, { entries: count }), console.log('inside count'))
-        //   })
+        fetch('http://localhost:5000/image', {
+          method: 'put',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            id: this.state.user.id
+          })
+        })
+          .then(res => res.json())
+          .then(count => {
+            this.setState(Object.assign(this.state.user, { entries: count }), console.log('inside count'))
+          })
         this.displayFaceBox(this.calculateFaceLocation(response))
       }
       )
