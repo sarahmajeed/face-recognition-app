@@ -1,19 +1,20 @@
-import React from 'react'
-import logo from '../../images/logo.png';
-import './NavBar.scss';
+import React from "react";
+import logo from "../../images/logo.png";
+import { Link } from "react-router-dom";
+import "./NavBar.scss";
 
 function NavBar() {
   return (
     <nav className="nav">
-      <div className="logo">
+      <Link to="/" className="logo">
         <img src={logo} alt="" />
-      </div>
+      </Link>
       <div className="signout">
-        <div className='signout-label'>Sign out</div>
+        <div className="signout-label">Sign out</div>
         <span className="line"></span>
       </div>
     </nav>
-  )
+  );
 }
 
-export default NavBar
+export default NavBar;

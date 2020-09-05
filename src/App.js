@@ -1,32 +1,33 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
-import Clarifai from 'clarifai';
-import FaceDetection from './Pages/FaceDetection/FaceDetection';
-import Signin from './components/Signin/Signin';
-import Signup from './components/Signup/Signup';
+import React from "react";
+import { Route } from "react-router-dom";
+import Clarifai from "clarifai";
+import FaceDetection from "./Pages/FaceDetection/FaceDetection";
+import Signin from "./components/Signin/Signin";
+import Signup from "./components/Signup/Signup";
 
-import HomePage from './Pages/HomePage/HomePage';
-import './App.scss';
-import { Component } from 'react';
+import HomePage from "./Pages/HomePage/HomePage";
+import "./App.scss";
+import { Component } from "react";
+import NavBar from "./components/NavBar/NavBar";
 
 const app = new Clarifai.App({
-  apiKey: '353f9cde81b746158b672581a1026c1e',
+  apiKey: "353f9cde81b746158b672581a1026c1e",
 });
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      input: '',
-      imageURL: '',
+      input: "",
+      imageURL: "",
       box: {},
       user: {
-        id: JSON.parse(localStorage.getItem('userid')),
-        name: JSON.parse(localStorage.getItem('username')),
-        email: JSON.parse(localStorage.getItem('useremail')),
-        entries: JSON.parse(localStorage.getItem('userentries')),
-        joined: JSON.parse(localStorage.getItem('userjoined'))
-      }
+        id: JSON.parse(localStorage.getItem("userid")),
+        name: JSON.parse(localStorage.getItem("username")),
+        email: JSON.parse(localStorage.getItem("useremail")),
+        entries: JSON.parse(localStorage.getItem("userentries")),
+        joined: JSON.parse(localStorage.getItem("userjoined")),
+      },
     };
     this.onInputChange = this.onInputChange.bind(this);
     this.onButtonSubmit = this.onButtonSubmit.bind(this);
@@ -41,28 +42,31 @@ class App extends Component {
         name: data.name,
         email: data.email,
         entries: data.entries,
-        joined: data.joined
-      }
-    })
-    localStorage.setItem('userid', JSON.stringify(this.state.user.id));
-    localStorage.setItem('username', JSON.stringify(this.state.user.name));
-    localStorage.setItem('useremail', JSON.stringify(this.state.user.email));
-    localStorage.setItem('userentries', JSON.stringify(this.state.user.entries));
-    localStorage.setItem('userjoined', JSON.stringify(this.state.user.joined));
-  }
+        joined: data.joined,
+      },
+    });
+    localStorage.setItem("userid", JSON.stringify(this.state.user.id));
+    localStorage.setItem("username", JSON.stringify(this.state.user.name));
+    localStorage.setItem("useremail", JSON.stringify(this.state.user.email));
+    localStorage.setItem(
+      "userentries",
+      JSON.stringify(this.state.user.entries)
+    );
+    localStorage.setItem("userjoined", JSON.stringify(this.state.user.joined));
+  };
 
   handleHomepageSignin(history) {
-    return history.push('/signin');
+    return history.push("/signin");
   }
   handleHomepageRegister(history) {
-    return history.push('/signup');
+    return history.push("/signup");
   }
 
   calculateFaceLocation = (res) => {
     const clarifaiFace =
       res.outputs[0].data.regions[0].region_info.bounding_box;
 
-    const image = document.getElementById('inputimage');
+    const image = document.getElementById("inputimage");
 
     const width = Number(image.width);
     const height = Number(image.height);
@@ -94,39 +98,39 @@ class App extends Component {
     app.models
       .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
       .then((response) => {
-        fetch('http://localhost:5000/image', {
-          method: 'put',
-          headers: { 'Content-Type': 'application/json' },
+        fetch("http://localhost:5000/image", {
+          method: "put",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            id: this.state.user.id
-          })
+            id: this.state.user.id,
+          }),
         })
-          .then(res => res.json())
-          .then(count => {
-            this.setState(Object.assign(this.state.user, { entries: count }), console.log('inside count'))
-          })
-        this.displayFaceBox(this.calculateFaceLocation(response))
-      }
-      )
+          .then((res) => res.json())
+          .then((count) => {
+            this.setState(
+              Object.assign(this.state.user, { entries: count }),
+              console.log("inside count")
+            );
+          });
+        this.displayFaceBox(this.calculateFaceLocation(response));
+      })
       .catch((err) => console.log(err));
   };
 
   componentDidMount() {
-    JSON.parse(localStorage.getItem('userid'))
-    JSON.parse(localStorage.getItem('username'))
-    JSON.parse(localStorage.getItem('useremail'))
-    JSON.parse(localStorage.getItem('userentries'))
-    JSON.parse(localStorage.getItem('userjoined'))
-
+    JSON.parse(localStorage.getItem("userid"));
+    JSON.parse(localStorage.getItem("username"));
+    JSON.parse(localStorage.getItem("useremail"));
+    JSON.parse(localStorage.getItem("userentries"));
+    JSON.parse(localStorage.getItem("userjoined"));
   }
 
   render() {
     return (
-      <div className='App'>
-
+      <div className="App">
         <Route
           exact
-          path='/'
+          path="/"
           render={(routeProps) => (
             <HomePage
               handleHomepageSignin={() =>
@@ -141,27 +145,21 @@ class App extends Component {
 
         <Route
           exact
-          path='/signin'
+          path="/signin"
           render={(routeProps) => (
-            <Signin
-              loadUser={this.loadUser}
-              routeProps={routeProps}
-            />
+            <Signin loadUser={this.loadUser} routeProps={routeProps} />
           )}
         />
         <Route
           exact
-          path='/signup'
+          path="/signup"
           render={(routeProps) => (
-            <Signup
-              loadUser={this.loadUser}
-              routeProps={routeProps}
-            />
+            <Signup loadUser={this.loadUser} routeProps={routeProps} />
           )}
         />
         <Route
           exact
-          path='/facedetect'
+          path="/facedetect"
           render={(routeProps) => (
             <FaceDetection
               onInputChange={this.onInputChange}
@@ -173,8 +171,6 @@ class App extends Component {
             />
           )}
         />
-
-
       </div>
     );
   }
