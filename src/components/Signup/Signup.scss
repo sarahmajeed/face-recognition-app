@@ -1,21 +1,23 @@
-@import '../../styles/colors.scss';
+@import "../../styles/colors.scss";
 
 .packet {
-  color:black;
+  color: black;
   border: 1px solid transparent;
   min-height: 100vh;
-  
+
   .form {
-    margin:60px auto;
+    margin: 60px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #ededed;
+    width: 500px;
+    height: 500px;
 
-    p{
+    p {
       font-size: 20px;
       letter-spacing: 1px;
       font-weight: 400;
-      
     }
 
     .span {
@@ -24,51 +26,47 @@
       width: 350px;
       margin-top: 2px;
       margin-bottom: 30px;
-      background-color:black;
-    }  
+      background-color: black;
+    }
     .inputs {
       display: flex;
       flex-direction: column;
       align-items: center;
-     
-  
-      input[type='password'],
-      input[type='email'],
-      input[type='text'] {
+
+      input[type="password"],
+      input[type="email"],
+      input[type="text"] {
         margin: 10px;
         width: 100px;
-        
       }
-      ::placeholder{
+      ::placeholder {
         color: pink;
       }
-      input[type='password']{
-        
+      input[type="password"] {
         letter-spacing: 3px;
       }
     }
-    
+
     .input-grp {
       position: relative;
-      
+
       .input {
         margin: 20px;
         padding: 5px;
         width: 300px;
       }
       .icon {
-        color:black;
+        color: black;
       }
 
       .label {
-        
-       width: 100px;
-       text-align: left;
+        width: 100px;
+        text-align: left;
         margin-bottom: 50px;
         position: absolute;
         top: 0px;
         left: 18px;
-     }
+      }
     }
   }
 }
@@ -76,4 +74,3 @@
 form + p {
   margin-top: 100px;
 }
-

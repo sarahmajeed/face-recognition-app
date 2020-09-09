@@ -41,7 +41,8 @@ class Signup extends Component {
             this.props.loadUser(user);
             console.log(user);
           }
-        });
+        })
+        .catch((err) => console.log(err.message));
     };
     const { username, email, password } = this.state;
     return (
