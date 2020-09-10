@@ -1,21 +1,33 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
-import ImageLinkForm from '../../components/ImageLinkForm/ImageLinkForm';
-import FaceRecognition from '../../components/FaceRecognition/FaceRecognition';
-import './FaceDetection.scss';
-import NavBar from '../../components/NavBar/NavBar'
+import React from "react";
+import { Route } from "react-router-dom";
+import ImageLinkForm from "../../components/ImageLinkForm/ImageLinkForm";
+import FaceRecognition from "../../components/FaceRecognition/FaceRecognition";
+import "./FaceDetection.scss";
+import NavBar from "../../components/NavBar/NavBar";
 
-
-function FaceDetection({ onInputChange, onButtonSubmit, box, imageURL, name, entries }) {
-  console.log('face detection rendering')
+function FaceDetection({
+  onInputChange,
+  onButtonSubmit,
+  box,
+  imageURL,
+  name,
+  entries,
+  handleHomepageRegister,
+  routeProps,
+}) {
+  console.log("face detection rendering");
   return (
     <div className="body-wrap">
-      <NavBar />
-      <div className='body'>
+      <NavBar
+        handleHomepageRegister={() =>
+          handleHomepageRegister(routeProps.history)
+        }
+      />
+      <div className="body">
         <div className="inputbox">
           <Route
             exact
-            path='/facedetect'
+            path="/facedetect"
             render={() => (
               <ImageLinkForm
                 onInputChange={onInputChange}
@@ -29,7 +41,7 @@ function FaceDetection({ onInputChange, onButtonSubmit, box, imageURL, name, ent
         <div className="box">
           <Route
             exact
-            path='/facedetect'
+            path="/facedetect"
             render={() => <FaceRecognition box={box} imageURL={imageURL} />}
           />
         </div>

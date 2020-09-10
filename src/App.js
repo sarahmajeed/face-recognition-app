@@ -168,6 +168,10 @@ class App extends Component {
               imageURL={this.state.imageURL}
               name={this.state.user.name}
               entries={this.state.user.entries}
+              routeProps={routeProps}
+              handleHomepageRegister={() =>
+                this.handleHomepageRegister(routeProps.history)
+              }
             />
           )}
         />
