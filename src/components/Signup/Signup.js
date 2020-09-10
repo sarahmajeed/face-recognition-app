@@ -25,7 +25,7 @@ class Signup extends Component {
   render() {
     const handleSignup = (event) => {
       event.preventDefault();
-      fetch("http://localhost:5000/signup", {
+      fetch("https://agile-castle-30517.herokuapp.com/signup", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -98,7 +98,7 @@ class App extends Component {
     app.models
       .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
       .then((response) => {
-        fetch("http://localhost:5000/image", {
+        fetch("https://agile-castle-30517.herokuapp.com/image", {
           method: "put",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
