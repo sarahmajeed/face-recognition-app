@@ -2,7 +2,6 @@
   "name": "face-detection-app",
   "version": "0.1.0",
   "private": true,
-  "main": "app.js",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -19,16 +18,11 @@
     "tachyons": "^4.11.1"
   },
   "scripts": {
-    "dev": "react-scripts start",
     "start": "serve -s build",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "heroku-postbuild": "npm run build"
-  },
-  "engines": {
-    "node": "~6.10.3",
-    "npm": "~5.6.0"
   },
   "eslintConfig": {
     "extends": "react-app"
